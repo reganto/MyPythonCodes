@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="direction: rtl;">
+    <div style="position:fixed; bottom: 150px; right:50%; direction: rtl;">
+        <input type="text" name="info" id="info" />
+        <input type="button" value="ارسال" onclick="sendData()">
+    </div>
+
+    <script>
+        var connection = new WebSocket('ws://' + location.host + '/chat');
+
+        function sendData() {
+            data = document.getElementById('info').value;
+            connection.send(data);
+        }
+
+        connection.onmessage = (e) => {
+            var para = document.createElement('p');
+            para.innerHTML = e.data;
+            document.body.appendChild(para);
+        }
+    </script>
+</body>
+</html>

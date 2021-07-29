@@ -1,0 +1,14 @@
+<html>
+<body>
+<p id="demo"></p>
+<input type="button" onclick="close_connection()" value="Close Connection" />
+
+<script>
+    const ws = new WebSocket("ws://" + location.host + "/ws");
+    ws.onmessage = (e) => {document.getElementById("demo").innerHTML += e.data};
+    function close_connection() {
+        ws.close();
+    }
+</script>
+</body>
+</html>
